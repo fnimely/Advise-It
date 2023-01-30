@@ -1,0 +1,14 @@
+body > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10%;
+}
+
+body > div p {
+    text-align: center;
+}
+
+body > div button {
+    width: 200px;
+}

@@ -1,0 +1,15 @@
+{
+  "name": "fnimely/Advise-It",
+  "description": "Student schedule tracking tool.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Facsimile Nimely",
+      "email": "dohfacsimile@gmail.com"
+    }
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}

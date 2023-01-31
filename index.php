@@ -20,9 +20,8 @@ $f3 = Base::instance();
 $adviseItCon = new AdviseItController($f3);
 $f3->route('GET /', 'AdviseItController->home');
 
-$f3->route('GET|POST /schedule/@token', function () {
-    global $f3;
-    $GLOBALS['manualToken'] = $f3->get('PARAMS.token');
+$f3->route('GET|POST /schedule/@token', function ($f3) {
+    $GLOBALS['studentToken'] = $f3->get('PARAMS.token');
     $GLOBALS['adviseItCon']->schedule();
 });
 

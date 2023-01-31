@@ -3,8 +3,7 @@
 ini_set('display errors', 1);
 error_reporting(E_ALL);
 
-require_once ("vendor/autoload.php");
-require_once("model/Database.php");
+require ("vendor/autoload.php");
 
 /**
  * The Advise-It controller
@@ -15,19 +14,21 @@ class AdviseItController {
 
     function  __construct($f3){
         $this->_adviseItDB = new Database();
+        $_SESSION['studentPlan'] = new Plan();
         $this->_f3 = $f3;
     }
 
     function home(): void
     {
-        $token = $this->generateToken();
-        $_SESSION["token"] = $token;
+        $_SESSION['studentPlan']->setToken($this->generateToken());
+        $route = "schedule/" .  $_SESSION['studentPlan']->getToken();
 
-        $route = "schedule/" . $token;
+//        add token to f3 hive
         $this->_f3->set('token', $route);
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $this->_f3->reroute($route);
+            $this->_adviseItDB->addToken( $_SESSION['studentPlan']->getToken());
+            $this->_f3->reroute("schedule/" . $_SESSION['studentPlan']->getToken());
         }
 
         $view = new Template();
@@ -45,16 +46,32 @@ class AdviseItController {
 
     function schedule(): void {
 
-        $token = $_SESSION["token"];
-        $this->_f3->set('textToken', $token);
+        // attempt request to db using URL token
+        $studentPlan = $this->_adviseItDB->getPlan($GLOBALS['studentToken']);
 
-        if(!empty($token)){
-            $this->_adviseItDB->addToken($token);
+        if($studentPlan){
+            $_SESSION['studentPlan']->setToken($studentPlan['token']);
+            $_SESSION['studentPlan']->setFall($studentPlan['fall']);
+            $_SESSION['studentPlan']->setWinter($studentPlan['winter']);
+            $_SESSION['studentPlan']->setSpring($studentPlan['spring']);
+            $_SESSION['studentPlan']->setSummer($studentPlan['summer']);
         } else {
-//            make get request to db using URL token
-            $this->_adviseItDB->getPlan($GLOBALS['manualToken']);
-//            display data in quarter box
+            $this->_f3->set("error", "Invalid token");
         }
+
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            try {
+                $this->_adviseItDB->addPlan($_SESSION['studentPlan']);
+            } catch (Exception $e) {
+                echo "Fail to add to DB: " . $e->getMessage();
+            }
+        }
+
+//        add plans to fat-free hive
+        $this->_f3->set("fall", $_SESSION['studentPlan']->getFall());
+        $this->_f3->set("winter", $_SESSION['studentPlan']->getWinter());
+        $this->_f3->set("spring", $_SESSION['studentPlan']->getSpring());
+        $this->_f3->set("summer", $_SESSION['studentPlan']->getSummer());
 
         $view = new Template();
         echo $view->render('views/schedule.html');

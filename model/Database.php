@@ -29,7 +29,7 @@ class Database {
     function getPlan($token){
         $this->_sql = "SELECT * FROM student_schedule WHERE token = :token";
 
-        $statement = $this->_dbh->prepare($sql);
+        $statement = $this->_dbh->prepare($this->_sql);
         $statement->bindParam(':token', $token);
         $statement->execute();
 
@@ -37,8 +37,21 @@ class Database {
         return $row;
     }
 
-    function addPlan($token){
+    function addPlan($studentPlan){
         $this->_sql = "UPDATE student_schedule SET 
-                    fall=:fall, winter=:winter, spring=:spring, summer=:summer";
+                    fall=:fall, winter=:winter, spring=:spring, summer=:summer 
+                    WHERE token = :token";
+
+        $statement = $this->_dbh->prepare($this->_sql);
+        $statement->bindParam(':fall', $studentPlan->getFall());
+        $statement->bindParam(':winter', $studentPlan->getWinter());
+        $statement->bindParam(':spring', $studentPlan->getSpring());
+        $statement->bindParam(':summer', $studentPlan->getSummer());
+
+        $success = $statement->execute();
+        if(!$success){
+            throw new Exception("Error code: " . $statement->errorCode() .
+                " Error info: " . implode(", ", $statement->errorInfo()));
+        }
     }
 }

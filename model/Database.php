@@ -47,6 +47,7 @@ class Database {
         $statement->bindParam(':winter', $studentPlan->getWinter());
         $statement->bindParam(':spring', $studentPlan->getSpring());
         $statement->bindParam(':summer', $studentPlan->getSummer());
+        $statement->bindParam(":token", $studentPlan->getToken());
 
         $success = $statement->execute();
         if(!$success){

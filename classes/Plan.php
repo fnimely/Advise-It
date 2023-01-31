@@ -1,10 +1,14 @@
 <?php
 
 class Plan {
-    private string $_token, $_fall, $_winter, $_spring, $_summer;
+    private string $_token = "", $_fall, $_winter, $_spring, $_summer;
 
-    public function __construct($token){
-        $this->_token = $token;
+    public function __construct(){
+        $this->_token = "";
+        $this->_fall = "";
+        $this->_winter = "";
+        $this->_summer = "";
+        $this->_spring = "";
     }
 
     /**

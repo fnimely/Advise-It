@@ -18,7 +18,7 @@ session_start();
 $f3 = Base::instance();
 
 $adviseItCon = new AdviseItController($f3);
-$f3->route('GET /', 'AdviseItController->home');
+$f3->route('GET|POST /', 'AdviseItController->home');
 
 $f3->route('GET|POST /schedule/@token', function ($f3) {
     $GLOBALS['studentToken'] = $f3->get('PARAMS.token');

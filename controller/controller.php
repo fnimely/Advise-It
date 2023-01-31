@@ -27,7 +27,7 @@ class AdviseItController {
         $this->_f3->set('token', $route);
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $this->_adviseItDB->addToken( $_SESSION['studentPlan']->getToken());
+            $this->_adviseItDB->addTokenId( $_SESSION['studentPlan']->getToken());
             $this->_f3->reroute("schedule/" . $_SESSION['studentPlan']->getToken());
         }
 

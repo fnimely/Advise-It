@@ -14,7 +14,7 @@ class Database {
         }
     }
 
-    function addToken($token): string{
+    function addTokenId($token): void {
         $this->_sql = "INSERT INTO student_schedule(token) VALUES (:token)";
 
         $statement = $this->_dbh->prepare($this->_sql);
@@ -22,8 +22,6 @@ class Database {
         $statement->bindParam(':token', $token);
         $statement->execute();
 
-        $id = $this->_dbh->lastInsertId();
-        return $id;
     }
 
     function getPlan($token){

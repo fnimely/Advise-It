@@ -18,8 +18,7 @@ class AdviseItController {
         $this->_f3 = $f3;
     }
 
-    function home(): void
-    {
+    function home(): void {
         $_SESSION['studentPlan']->setToken($this->generateToken());
         $route = "schedule/" .  $_SESSION['studentPlan']->getToken();
 
@@ -51,10 +50,10 @@ class AdviseItController {
 
         if($studentPlan){
             $_SESSION['studentPlan']->setToken($studentPlan['token']);
-            $_SESSION['studentPlan']->setFall($studentPlan['fall']);
-            $_SESSION['studentPlan']->setWinter($studentPlan['winter']);
-            $_SESSION['studentPlan']->setSpring($studentPlan['spring']);
-            $_SESSION['studentPlan']->setSummer($studentPlan['summer']);
+            $_SESSION['studentPlan']->setFall($studentPlan['fall'] ?? "");
+            $_SESSION['studentPlan']->setWinter($studentPlan['winter'] ?? "");
+            $_SESSION['studentPlan']->setSpring($studentPlan['spring'] ?? "");
+            $_SESSION['studentPlan']->setSummer($studentPlan['summer'] ?? "");
         } else {
             $this->_f3->set("error", "Invalid token");
         }

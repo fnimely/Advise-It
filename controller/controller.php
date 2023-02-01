@@ -60,6 +60,10 @@ class AdviseItController {
 
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
             try {
+                $_SESSION['studentPlan']->setFall($_POST["fall"]);
+                $_SESSION['studentPlan']->setWinter($this->_f3->get('POST.winter'));
+                $_SESSION['studentPlan']->setSpring($this->_f3->get('POST.spring'));
+                $_SESSION['studentPlan']->setSummer($this->_f3->get('POST.summer'));
                 $this->_adviseItDB->addPlan($_SESSION['studentPlan']);
             } catch (Exception $e) {
                 echo "Fail to add to DB: " . $e->getMessage();

@@ -12,3 +12,12 @@ textarea {
 label {
     width: 50%;
 }
+
+aside p {
+    font-size: 2rem;
+    text-align: center;
+}
+
+aside p a {
+    text-decoration: none;
+}

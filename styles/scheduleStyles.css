@@ -25,3 +25,9 @@ aside p a {
 p#change, p#noChange {
     display: none;
 }
+
+@media print {
+    img, button {
+        visibility: hidden;
+    }
+}

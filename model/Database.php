@@ -24,6 +24,11 @@ class Database {
 
     }
 
+    function getAllPlans(): array {
+        $this->_sql = "SELECT * FROM student_schedule";
+        return $this->_dbh->query($this->_sql)->fetchAll();
+    }
+
     function getPlan($token){
         $this->_sql = "SELECT * FROM student_schedule WHERE token = :token";
 

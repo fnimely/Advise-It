@@ -96,4 +96,12 @@ class AdviseItController {
         $view = new Template();
         echo $view->render("views/login.html");
     }
+
+    function admin(): void {
+        $studentPlans = $this->_adviseItDB->getAllPlans();
+        $this->_f3->set('studentPlans', $studentPlans);
+
+        $view = new Template();
+        echo $view->render("views/adminPage.html");
+    }
 }

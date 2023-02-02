@@ -37,7 +37,7 @@ class Database {
 
     function addPlan($studentPlan){
         $this->_sql = "UPDATE student_schedule SET 
-                    fall=:fall, winter=:winter, spring=:spring, summer=:summer 
+                    fall=:fall, winter=:winter, spring=:spring, summer=:summer, advisor=:advisor
                     WHERE token = :token";
 
         $statement = $this->_dbh->prepare($this->_sql);
@@ -46,6 +46,7 @@ class Database {
         $statement->bindParam(':spring', $studentPlan->getSpring());
         $statement->bindParam(':summer', $studentPlan->getSummer());
         $statement->bindParam(":token", $studentPlan->getToken());
+        $statement->bindParam(":advisor", $studentPlan->getAdvisor());
 
         $success = $statement->execute();
         if(!$success){

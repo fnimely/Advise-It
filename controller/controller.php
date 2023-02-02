@@ -54,6 +54,7 @@ class AdviseItController {
             $_SESSION['studentPlan']->setWinter($studentPlan['winter'] ?? "");
             $_SESSION['studentPlan']->setSpring($studentPlan['spring'] ?? "");
             $_SESSION['studentPlan']->setSummer($studentPlan['summer'] ?? "");
+            $_SESSION['studentPlan']->setAdvisor($studentPlan['advisor'] ?? "");
         } else {
             $this->_f3->set("error", "Invalid token");
         }
@@ -64,6 +65,7 @@ class AdviseItController {
                 $_SESSION['studentPlan']->setWinter($this->_f3->get('POST.winter'));
                 $_SESSION['studentPlan']->setSpring($this->_f3->get('POST.spring'));
                 $_SESSION['studentPlan']->setSummer($this->_f3->get('POST.summer'));
+                $_SESSION['studentPlan']->setAdvisor($this->_f3->get('POST.advisor'));
                 $this->_adviseItDB->addPlan($_SESSION['studentPlan']);
             } catch (Exception $e) {
                 echo "Fail to add to DB: " . $e->getMessage();
@@ -75,6 +77,7 @@ class AdviseItController {
         $this->_f3->set("winter", $_SESSION['studentPlan']->getWinter());
         $this->_f3->set("spring", $_SESSION['studentPlan']->getSpring());
         $this->_f3->set("summer", $_SESSION['studentPlan']->getSummer());
+        $this->_f3->set("advisor", $_SESSION['studentPlan']->getAdvisor());
 
         $view = new Template();
         echo $view->render('views/schedule.html');

@@ -25,6 +25,8 @@ $f3->route('GET|POST /schedule/@token', function ($f3) {
     $GLOBALS['adviseItCon']->schedule();
 });
 
+$f3->route('GET|POST /admin-login', 'AdviseItController->login');
+
 $f3->run();
 
 //Send output to the browser

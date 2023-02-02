@@ -82,4 +82,17 @@ class AdviseItController {
         $view = new Template();
         echo $view->render('views/schedule.html');
     }
+
+    function login(): void {
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $username = $_POST["username"];
+            $password = $_POST["password"];
+
+            if($username == ADMIN_USERNAME && $password == ADMIN_PASSWORD){
+                $this->_f3->reroute("admin");
+            }
+        }
+        $view = new Template();
+        echo $view->render("views/login.html");
+    }
 }

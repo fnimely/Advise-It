@@ -26,6 +26,7 @@ $f3->route('GET|POST /schedule/@token', function ($f3) {
 });
 
 $f3->route('GET|POST /admin-login', 'AdviseItController->login');
+$f3->route('GET|POST /admin', 'AdviseItController->admin');
 
 $f3->run();
 

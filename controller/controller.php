@@ -97,6 +97,11 @@ class AdviseItController {
         echo $view->render("views/login.html");
     }
 
+    function logout(): void {
+        session_unset();
+        $this->_f3->reroute('/');
+    }
+
     function admin(): void {
         $studentPlans = $this->_adviseItDB->getAllPlans();
         $this->_f3->set('studentPlans', $studentPlans);

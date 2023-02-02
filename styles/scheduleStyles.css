@@ -21,3 +21,7 @@ aside p {
 aside p a {
     text-decoration: none;
 }
+
+p#change, p#noChange {
+    display: none;
+}

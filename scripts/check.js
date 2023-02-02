@@ -20,7 +20,6 @@ planForm.addEventListener("submit", (e) => {
     }
 
     planFormValsCheck(planFormVals);
-    console.log(planFormValsSize);
 
     // no changes made if size of set remains 4
     if(planFormVals.size === planFormValsSize){
@@ -37,7 +36,5 @@ function planFormValsCheck(vals){
         if(planForm.elements[i].value.length > 0){
             vals.add(planForm.elements[i].value);
         }
-        // console.log(planForm.elements[i].value);
     }
-    console.log(planFormVals.size);
 }

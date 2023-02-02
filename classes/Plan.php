@@ -1,7 +1,7 @@
 <?php
 
 class Plan {
-    private string $_token = "", $_fall, $_winter, $_spring, $_summer, $_advisor;
+    private string $_token = "", $_fall, $_winter, $_spring, $_summer, $_advisor, $_time;
 
     public function __construct(){
         $this->_token = "";
@@ -10,6 +10,7 @@ class Plan {
         $this->_summer = "";
         $this->_spring = "";
         $this->_advisor = "";
+        $this->_time = "";
     }
 
     /**
@@ -106,5 +107,21 @@ class Plan {
     public function setAdvisor(string $advisor): void
     {
         $this->_advisor = $advisor;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTime(): string
+    {
+        return $this->_time;
+    }
+
+    /**
+     * @param string $time
+     */
+    public function setTime(string $time): void
+    {
+        $this->_time = $time;
     }
 }

@@ -84,11 +84,12 @@ class AdviseItController {
     }
 
     function login(): void {
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            $username = $_POST["username"];
-            $password = $_POST["password"];
 
-            if($username == ADMIN_USERNAME && $password == ADMIN_PASSWORD){
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            $usr = $_POST["advisorUsr"];
+            $pswrd = $_POST["advisorPass"];
+
+            if($usr == ADMIN_USERNAME && $pswrd == ADMIN_PASSWORD){
                 $this->_f3->reroute("admin");
             }
         }
